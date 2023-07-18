@@ -71,6 +71,7 @@ export class AdministrationMessagesComponent implements OnInit {
 
       this.data.poljePorukaKorisnika = this.mergedProizvodi;
       this.data.adminKontaktiraoKorisnika = false;
+
     });
   }
 }
