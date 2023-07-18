@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Pretraži proizvode..." id="search"
+                    [(ngModel)]="search" (keyup)="searchFunction()">
+            </div>
+        </div>
+        <div class="col-md-3" style="margin-left:3%">
+            <button class="btn btn-success" routerLink="/editProizvoda" style="width:100%" (click)="novi()"><i
+                    class="fa-solid fa-plus"></i></button>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th class="sadrzajTablice">Kategorija proizvoda</th>
+                            <th class="sadrzajTablice">Ime proizvoda</th>
+                            <th class="sadrzajTablice">Opis proizvoda</th>
+                            <th class="sadrzajTablice">Cijena proizvoda</th>
+                            <th class="sadrzajTablice">Raspoloživo komada</th>
+                            <th class="sadrzajTablice">Sifra proizvoda</th>
+                            <th class="sadrzajTablice">Opcije</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let proizvod of mergedProizvodi let idx = index" style="text-align: center;"
+                            class="redak">
+
+                            <td class="sadrzajTablice">{{proizvod.naziv}}</td>
+                            <td class="sadrzajTablice">{{proizvod.kratakOpisProizvoda}}</td>
+                            <td class="sadrzajTablice">{{proizvod.opis}}</td>
+                            <td class="sadrzajTablice">${{proizvod.cijena}}</td>
+                            <td class="sadrzajTablice">{{proizvod.respolozivo}}</td>
+                            <td class="sadrzajTablice">{{proizvod.sifra}}</td>
+
+                            <td class="sadrzajTablice">
+                                <div class="col" style="margin-bottom: 10px;">
+                                    <button class="btn btn-primary" style="width:100%" (click)="uredi(idx)"
+                                        routerLink="/editProizvoda"><i class="fa-solid fa-pen-to-square"></i></button>
+                                </div>
+
+                                <div class="col">
+                                    <button class="btn btn-danger" style="width:100%" (click)="obrisi(idx)"><i
+                                            class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

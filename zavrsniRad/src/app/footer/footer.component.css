@@ -1,0 +1,46 @@
+.main-footer {
+    vertical-align: middle;
+    margin: auto;
+    padding-top: 3%;
+    padding-bottom: 1%;
+    /* background-color: #E5E4E2; */
+    background-color: #F0F8FF;
+    color: black;
+
+}
+
+.row {
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.naziviFooter {
+    margin-bottom: 2%;
+    margin-top: -2%;
+}
+
+/**/
+
+.btn {
+    padding: 10px;
+    background-color: #6CB4EE;
+}
+
+@media only screen and (max-width:345px) {
+    .OTvrtki {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .email {
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (min-width: 405px) and (max-width:470px) {
+    .btn {
+        margin-top: 20px;
+    }
+
+
+}

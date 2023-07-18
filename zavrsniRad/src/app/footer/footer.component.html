@@ -1,0 +1,72 @@
+<body>
+
+    <footer class="main-footer" style="font-size: 16px; margin-top: -15px;">
+
+        <div class="row">
+            <div class="col OTvrtki">
+
+                <div style="font-weight:bold; margin-bottom: 5px;">Lp WebShop d.o.o
+
+                </div>
+                <div style="margin-bottom: 5px;">Heinzelova ulica 44</div>
+                <div>10000 Zagreb, Croatia</div>
+            </div>
+            <!---->
+            <div class="col" style="text-align: center;">
+                <div style="margin-bottom: 5px;"><i class="fa-solid fa-mobile-button"></i> +385 91 345 2942</div>
+                <!--telefon-->
+                <div style="margin-bottom: 5px;"><i class="fa-solid fa-phone"></i> 01 2970 451</div> <!--location-->
+                <div style="text-decoration: underline; cursor: pointer;" class="email"><i
+                        class="fa-solid fa-envelope "></i>
+                    leon.pisacic2002@gmail.com
+                </div> <!--email-->
+
+            </div>
+            <div class="col">
+
+                <div style="text-align: center;" *ngIf="!jeAdmin">
+                    <button class="btn" routerLink="/kontaktForma">Kontaktirajte nas</button>
+                </div>
+
+
+                <div style="text-align: center;" *ngIf="jeAdmin " (click)="postaviVrijednost()">
+                    <button class="btn" routerLink="/kontaktirajKorisnika">Kontaktiraj korisnika</button>
+                </div>
+            </div>
+        </div>
+
+
+        <hr style="margin-bottom: 30px;">
+        <div class="row" style="width: 100%;">
+            <!--col 1-->
+            <div class="col" style="text-align: left;">
+                <a href="https://www.toray.eu/eu/europe/network/tieu/downloads/Terms_and_Conditions_TIEU.pdf"
+                    style="color: black; text-decoration: underline;">
+                    Uvjeti i privatnosti
+                </a>
+            </div>
+
+            <!--col 2-->
+            <div class="col" style="text-align: center; ">
+                <a routerLink="/kontaktInfo" style="color: black; text-decoration: underline;">Tko smo mi?</a>
+            </div>
+
+            <!--col 3-->
+            <div class="col" style="text-align: center; ">
+
+                <a href="https://www.facebook.com/leon.pisacic/">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="https://twitter.com/LeonPisacic" style="margin-left: 25%; margin-right: 25%;">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+                <a href="https://www.instagram.com/leon__pisacic/">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+    </footer>
+</body>

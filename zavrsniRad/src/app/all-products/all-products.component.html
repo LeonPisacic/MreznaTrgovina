@@ -1,0 +1,46 @@
+<div class="container-fluid"> <!--ili container-fluid-->
+    <h3 style="margin-bottom: 5%; margin-top:20px; margin-left: 4px;"
+        *ngIf="this.idKategorije === -1 || this.idKategorije === undefined" class="naslov"> Svi proizvodi</h3>
+
+    <h3 style="margin-bottom: 5%; margin-top:20px;" *ngIf="this.idKategorije !== -1 && this.idKategorije !== undefined">
+        {{this.data.vratiTrenutnuKategorijuProizvoda().naziv}}</h3>
+
+
+    <div class="container praznaKosarica" *ngIf="nemaProizvodaUTojKategoriji">
+
+        <div class="row ">
+            <div class="col text-center ">
+                <div class="cart">
+                    <img src="assets/slike/no-item-found-here.png" style="margin-bottom: 5%;">
+                    <br>
+                    <span class="tekst" style="font-weight: bold;">U ovoj kategoriji trenutno ne postoje
+                        proizvodi</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" *ngIf="!nemaProizvodaUTojKategoriji">
+        <div class="col sirina" *ngFor="let proizvod of poljeProizvoda; let i=index">
+            <a class="redirectProizvoda">
+                <div class="product-info" routerLink="/opis" (click)="detalji(proizvod)" (click)="sendIndex(i)">
+                    <img src={{proizvod.slika}}>
+                    <div class="naslovProizvoda">{{proizvod.kratakOpisProizvoda}}</div>
+                    <div class="cijena">{{proizvod.cijena}}€</div>
+                </div>
+                <!-- Update the condition for rendering the buttons -->
+                <button class="btn" (click)="dodajProizvodUKosaricu(i)" *ngIf="proizvod.respolozivo !== 0">
+                    <i class="fa-solid fa-cart-plus" style="margin-right: 5px;"></i> <span>Dodaj u košaricu</span>
+                </button>
+                <button class="btn" (click)="nemaKolicine()" *ngIf="proizvod.respolozivo === 0"
+                    [disabled]="proizvod.respolozivo === 0" style="background-color:  #D21F3C; color: white;">
+                    <span>Proizvod nedostupan</span>
+                </button>
+            </a>
+        </div>
+    </div>
+
+
+
+</div>

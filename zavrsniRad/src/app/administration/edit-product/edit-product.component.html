@@ -1,0 +1,94 @@
+<body>
+    <h1 style="text-align: center;">Dodavanje proizvoda</h1>
+    <form #f="ngForm">
+        <div class="container">
+
+            <div class="form-group">
+                <label for="imeProizvoda">Ime proizvoda:</label>
+                <input type="text" name="ime" class="form-control" id="imeProizvoda" required
+                    [(ngModel)]="trenutnoDodanProizvod.imeProizvoda" #ime=ngModel>
+
+                <p *ngIf="!ime.valid && ime.touched" style="color: red">Upisite ime proizvoda</p>
+            </div>
+            <!---->
+            <div class="form-group">
+                <label for="kratakOpis">Kratak opis proizvoda:</label>
+                <input type="text" name="kratakOpis" class="form-control" id="kratakOpis" required
+                    [(ngModel)]="trenutnoDodanProizvod.kratakOpisProizvoda" #kratakOpis=ngModel>
+
+                <p *ngIf="!kratakOpis.valid && kratakOpis.touched" style="color: red">Upisite kratak opis proizvoda</p>
+            </div>
+            <!---->
+            <div class="form-group">
+                <label for="opis">Opis:</label>
+                <textarea class="form-control" id="opis" name="opis" rows="5" required
+                    [(ngModel)]="trenutnoDodanProizvod.opis" #opis=ngModel></textarea>
+
+                <p *ngIf="!opis.valid && opis.touched" style="color: red">Opis proizvoda je obavezan</p>
+            </div>
+            <!---->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label for="cijena">Cijena:</label>
+                        <input type="number" class="form-control" id="cijena" name="cijena" required
+                            [(ngModel)]="trenutnoDodanProizvod.cijena" #cijena=ngModel>
+
+                        <p *ngIf="!cijena.valid && cijena.touched" style="color: red">Unesite svoje ime</p>
+                    </div>
+                    <div class="col">
+                        <label for="respolozivo">Raspolozivo:</label>
+                        <input type="number" class="form-control" id="respolozivo" name="respolozivo" required
+                            [(ngModel)]="trenutnoDodanProizvod.respolozivo" #raspolozivo=ngModel>
+
+                        <p *ngIf="!raspolozivo.valid && raspolozivo.touched" style="color: red">Unesite raspolozivo
+                            stanje proizvoda</p>
+
+                        <p *ngIf="trenutnoDodanProizvod.respolozivo < 0 && raspolozivo.touched" style="color: red">
+                            Kolicina ne smije biti ispod nule</p>
+                    </div>
+                    <div class="col">
+                        <label for="sifraProizvoda">Sifra proizvoda:</label>
+                        <input type="number" class="form-control" id="sifra" name="sifra" required
+                            [(ngModel)]="trenutnoDodanProizvod.sifra" #sifra=ngModel (keyup)="provjeriSifru()">
+
+                        <p *ngIf="!sifra.valid && sifra.touched" style="color: red">Sifra
+                            proizvoda je obavezna</p>
+
+                        <p *ngIf="sifraVecPostoji" style="color: red">Sifra vec postoji</p>
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <div class="form-group">
+                <label for="slika">Slika:</label>
+                <input type="text" class="form-control" id="slika" name="slika" required
+                    [(ngModel)]="trenutnoDodanProizvod.slika" #slika=ngModel>
+                <p *ngIf="!slika.valid && slika.touched" style="color: red">URL slike je obavezan</p>
+            </div>
+            <!---->
+            <div class="form-group">
+                <label for="dropdown">Odaberi kategoriju proizvoda:</label>
+                <select class="form-control" id="dropdown" name="dropdown" required
+                    [(ngModel)]="trenutnoDodanProizvod.kategorijaID" #dropdown="ngModel">
+
+                    <!-- <option value='' selected style="text-align: center;">--Please choose an option--</option> -->
+
+                    <option *ngFor="let kategorija of poljeKategorija" style="text-align: center;"
+                        [value]="kategorija.id">
+                        {{kategorija.naziv}}
+                    </option>
+
+                </select>
+                <p *ngIf="trenutnoDodanProizvod.kategorijaID === 0  && dropdown.touched || dropdown.value === ''"
+                    style="color: red">Unos
+                    kategorije
+                    je obavezan </p>
+            </div>
+            <!---->
+            <button type="submit" class="btn btn-primary" style="width:100%"
+                [disabled]="!f.valid || trenutnoDodanProizvod.kategorijaID === 0 || sifraVecPostoji || trenutnoDodanProizvod.respolozivo < 0"
+                (click)="submit()">Submit</button>
+        </div>
+    </form>
+</body>

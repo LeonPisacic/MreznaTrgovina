@@ -1,0 +1,175 @@
+#logo {
+    width: 50px;
+    height: 50px;
+    /* centrira */
+}
+
+.odjava {
+    padding: 5px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 0%;
+}
+
+.ulogiran {
+    color: rgb(55, 139, 168);
+    text-decoration: underline;
+    font-family: monospace;
+    margin: auto 10px;
+    text-align: center;
+}
+
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+
+#lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -7px;
+}
+
+.ikone {
+    text-align: center;
+    width: 20px;
+}
+
+.menu-text {
+    display: none;
+}
+
+.adminFunckije {
+    margin-right: 10px;
+}
+
+
+@media only screen and (max-width:466px) {
+
+    .kosarica,
+    .adminFunckije {
+        margin-bottom: 10px;
+    }
+
+    .prijavaIRregistracija {
+        margin-bottom: 10px;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .menu-text {
+        display: inline-block;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .ulogiran {
+        margin-left: 0px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .row p,
+    .row button {
+        width: 45%;
+        margin: 0;
+    }
+
+}
+
+@media only screen and (min-width:447px) and (max-width:537px) {
+
+    .kosarica,
+    .adminFunckije {
+        margin-bottom: 10px;
+    }
+
+    .prijavaIRregistracija {
+        margin-bottom: 10px;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .menu-text {
+        display: inline-block;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .ulogiran {
+        margin-left: 0px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .row p,
+    .row button {
+        width: 47%;
+    }
+
+}
+
+@media (min-width: 537px) and (max-width:992px) {
+    .navbar-toggler {
+        display: none !important;
+    }
+
+    .navbar-collapse {
+        display: flex !important;
+        justify-content: flex-end !important;
+    }
+
+    .navbar-nav {
+        flex-direction: row !important;
+    }
+
+    .navbar-nav .nav-item {
+        margin-left: 15px;
+    }
+
+    .menu-text {
+        display: none;
+    }
+
+    .nav-link2 {
+        margin-right: 20px;
+    }
+
+    .adminFunckije {
+        margin-right: 5px;
+    }
+
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 0%;
+    }
+
+}

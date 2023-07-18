@@ -1,0 +1,40 @@
+.praznaKosarica {
+    width: 100%;
+    border: 5px dotted darkgray;
+    border-radius: 2%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.cart img {
+    width: 20%;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.tekst {
+    font-family: monospace;
+    font-size: 24px;
+}
+
+td {
+    vertical-align: middle;
+}
+
+.red {
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 3%;
+    margin-bottom: 3%;
+}
+
+.popisKorisnikaAdmin {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.btn.btn-success.statusNarudzbe.green {
+    background-color: green;
+    border-color: green;
+    color: white;
+}

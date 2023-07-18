@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/registracija</title>
+</head>
+
+<body style="margin-top: 80px;">
+    <h2 style="margin-left: 6.5%;">Forma za prijavu</h2>
+    <form #f="ngForm"> <!--with this we can get acccess to the form created by Angular (local reference)-->
+        <div class="imgcontainer">
+            <img src="assets/slike/img_avatar2.png" class="avatar">
+        </div>
+
+        <div class="container">
+            <label for="uname"><b>Korisničko ime</b></label>
+            <!---->
+
+            <input type="text" placeholder="Unesi korisničko ime" name="uname" required [(ngModel)]="log.email"
+                #email="ngModel" (change)="checkEmailAdress()">
+            <p *ngIf="!emailPostoji && email.touched" style="color: red">Korisničko ime ne postoji</p>
+            <!---->
+
+            <label for="psw"><b>Lozinka</b></label>
+            <input type="password" placeholder="Unesi lozinku" name="psw" required [(ngModel)]="log.lozinka"
+                #password="ngModel" (change)="checkPassword()">
+
+            <p *ngIf="!password.valid && password.touched" style="color: red">Niste upisali lozinku</p>
+            <p *ngIf="!lozinkaJeValjana && password.touched" style="color: red">Lozinka nije ispravna</p>
+
+            <!---->
+
+            <button type="submit" class="btn btn-success" (click)="logiraj()" [disabled]=" !f.valid"> Prijavi
+                se</button>
+
+            <label> <input type="checkbox" checked="checked" name="remember"> Zapamti me </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1;">
+            <button type="button" class="cancelbtn" routerLink="">Odustani</button>
+            <!--Ukoliko se klikne cancel, vodi se na pocetnu stranicu-->
+            <span class="psw"><a href="#">Zaboravljena lozinka?</a></span>
+        </div>
+
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+</head>
+
+<nav class="main-header navbar navbar-expand-lg navbar-white navbar-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+        <ul class="navbar-nav  ml-2">
+            <li class="nav-item izbornikKategorija">
+                <a class="nav-link nav-link2 " data-widget="pushmenu" href="#" role="button">
+                    <span class="menu-text" style="margin-right:10px;">Izbornik kategorija</span>
+                    <i class="fas fa-bars"></i>
+                </a>
+            </li>
+        </ul>
+
+        <div class="logo-container ml-2">
+            <a class="navbar-brand" routerLink="" (click)="filtrirajKategoriju(-1)">
+                <img src="assets/slike/logo.png" id="logo" style="cursor: pointer;">
+            </a>
+        </div>
+
+        <div class="ml-auto navbar-nav">
+            <span class="btn btn-dark btn-md kosarica ml-2" routerLink="/kosarica" routerLinkActive="active"
+                *ngIf="!jeAdmin">
+                <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                <span class='badge badge-primary' id='lblCartCount'> {{ this.dataService.brojacKosarica}}</span>
+            </span>
+
+            <span class="btn btn-dark btn-md adminFunckije" *ngIf="jeAdmin" routerLink="/administracija"
+                routerLinkActive="active">
+                <i class="fa-solid fa-gear"></i>
+            </span>
+
+            <span class="btn btn-dark btn-md adminFunckije" *ngIf="jeAdmin" routerLink="/sveNarudzbeAdmin"
+                routerLinkActive="active">
+                <i class="fa-solid fa-truck-fast"></i>
+            </span>
+
+            <span class="btn btn-dark btn-md adminFunckije" *ngIf="jeAdmin" routerLink="/porukeAdmin"
+                routerLinkActive="active">
+                <i class="fa-regular fa-message"></i>
+                <span class='badge badge-primary porukeAdmina' id='lblCartCount'>
+                    {{this.dataService.brojacPorukaAdmin}}
+                </span>
+            </span>
+
+            <button class="prijavaIRregistracija ml-2" routerLink="/login" *ngIf="!jeUlogiran">Prijava</button>
+            <button class="prijavaIRregistracija ml-2 rega" routerLink="/registracija"
+                *ngIf="!jeUlogiran">Registracija</button>
+
+            <div class="col">
+                <div class="row">
+                    <p *ngIf="jeUlogiran" class="ulogiran" routerLink="/pregledNarudzbi" style="cursor: pointer;">
+                        Pozdrav
+                        {{this.logiranKorisnik.ime}}</p>
+
+                    <button *ngIf="jeUlogiran" (click)="odjava()" class="ml-2 odjava"
+                        style="font-size: 15px; cursor: pointer;">
+                        <i class="fa-solid fa-right-from-bracket"></i> Odjavi se
+                    </button>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</nav>
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a class="brand-link" style="text-align: center;">
+        <span class="brand-text font-weight-light; color: white">LP trgovina</span>
+    </a>
+
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="justify-content: center;">
+            <div>
+                <img src="assets/slike/logo.png" routerLink="" alt="User Image" class="img-circle elevation-2"
+                    style="cursor: pointer;">
+            </div>
+        </div>
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-header" style="margin-left: 8px; font-weight: bold;">Informatika</li>
+                <li class="nav-item has-treeview">
+                    <a routerLink="" class="nav-link " (click)="filtrirajKategoriju(-1)" routerLink="/glavno">
+                        <p>
+                            Sve kategorije
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item kategorije" *ngFor="let kategorija of poljeKategorija">
+                    <a [routerLink]="['/', kategorija.naziv]" class="nav-link"
+                        (click)="filtrirajKategoriju(kategorija.id); trenutnaKategorija(kategorija)">
+                        <i [ngClass]="'fas ' + kategorija.fontAwesomeIcon" class="ikone"></i>
+                        <p style="margin-left: 10px;">
+                            {{kategorija.naziv}}
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<app-reklame></app-reklame>

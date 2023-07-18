@@ -1,0 +1,201 @@
+<div id="services">
+    <div class="container-fluid">
+        <h2 style="margin-bottom: 50px;"> Novi proizvodi </h2>
+        <div class="row red" *ngIf="!nemaProizvodaUTojKategoriji">
+
+
+            <div class="col sirina" *ngFor="let proizvod of poljeProizvoda; let i=index">
+                <!--trebao bi se nauciti kako napraviti resonsive design
+            kako bih mogao kreirati svoju klasu 'col' jer kad istu maknem, to je ono sto zelim (prikaz proizvoda) ali nije responsive design-->
+                <img src="/assets/slike/novo.svg" style="width: 40px; position: absolute; right: 40px;">
+                <a class="redirectProizvoda">
+                    <div class="product-info" routerLink="/opis" (click)="detalji(proizvod)" (click)="sendIndex(i)">
+                        <img src={{proizvod.slika}}>
+                        <div class="naslovProizvoda">{{proizvod.kratakOpisProizvoda}}</div>
+                        <div class="cijena">{{proizvod.cijena}}€</div>
+                    </div>
+                    <button class="btn" (click)="dodajProizvodUKosaricu(i)" *ngIf="proizvod.respolozivo !== 0">
+                        <i class="fa-solid fa-cart-plus" style="margin-right: 5px;"></i> <span>Dodaj u
+                            košaricu</span>
+                    </button>
+
+                    <button class="btn" (click)="this.glavno.nemaKolicine()" *ngIf="proizvod.respolozivo === 0"
+                        [disabled]="proizvod.respolozivo === 0" style="background-color:  #D21F3C; color: white;">
+                        <span>Proizvod nedostupan</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="container">
+        <h2 style="margin-top: 30px; text-align: center;">Naše usluge</h2>
+        <div class="services-list">
+            <div>
+
+                <i class="fa-solid fa-computer" id="centered-link"></i>
+                <!--Ovo je predefniriani kod s fontaswome stranice-->
+                <h2 style="text-align: center;">Prodaja stolnih i prijenosnih računala</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt doloremque amet quia. Nam quasi
+                    modi nisi cupiditate ex inventore dolores possimus dolorum et impedit laborum, ea hic fugit aperiam?
+                    Maxime.
+                </p>
+                <a href="#">Nauči više</a>
+            </div>
+            <!---->
+            <div>
+                <i class="fa-regular fa-keyboard" id="centered-link"></i>
+                <h2 style="text-align: center;">Mobilni uređaji i prateća periferija</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt doloremque amet quia. Nam quasi
+                    modi nisi cupiditate ex inventore dolores possimus dolorum et impedit laborum, ea hic fugit aperiam?
+                    Maxime.
+                </p>
+                <a href="#">Nauči više</a>
+            </div>
+            <!---->
+            <div>
+                <i class="fa-solid fa-blender" id="centered-link"></i>
+                <h2 style="text-align: center;">Bijela tehnika i mali kućanski aparati</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
+                    doloremque amet quia. Nam quasi
+                    modi nisi cupiditate ex inventore dolores possimus dolorum et impedit laborum, ea hic fugit aperiam?
+                    Maxime.
+                </p>
+                <a href="#">Nauči više</a>
+            </div>
+        </div>
+        <hr style="margin-top: 50px;">
+        <div class="services-review">
+            <h2 style="margin-top: 50px; text-align: center;"> Što naši kupci kažu o nama?</h2>
+            <div class="row">
+                <div class="col-md-6 recenzija ">
+                    <div class="poljeZaRecenziju">
+                        <div class="sve" style="margin-bottom: 20px;">
+                            <img src="assets/slike/korisnik.jpg" class="slikaOsobeKojaRecenzira">
+                            <span class="imeOsobeKojaRecenzira">Marko Horvat</span>
+                            <span class="usernameOsobeKojaRecenzira">@HorvatMarko</span>
+
+                            <span class="zvijezdice">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </span>
+                        </div>
+
+                        <div>Ne mogu dovoljno nahvaliti kvalitetu proizvoda koje sam kupio u ovoj mrežnoj trgovini.
+                            Svaki
+                            komad tehnologije koji sam naručio bio je iznimno dobro izrađen i pružio izvanredne
+                            performanse.
+                            Također, njihova web stranica je jednostavna za korištenje, a proces narudžbe je glatko
+                            funkcionirao. Svakako preporučujem ovu trgovinu svima koji traže visokokvalitetnu tehniku.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 recenzija ">
+                    <div class="poljeZaRecenziju">
+                        <div style=" margin-bottom: 20px;">
+                            <img src="assets/slike/korisnik1.avif" class="slikaOsobeKojaRecenzira">
+                            <span class="imeOsobeKojaRecenzira">Lara Kuntić</span>
+                            <span class="usernameOsobeKojaRecenzira">@KunticL</span>
+
+                            <span class="zvijezdice">
+                                <span class=" fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </span>
+                        </div>
+
+                        <div>Ova mrežna trgovina je pravo otkriće za sve moderne žene koje žele pratiti najnovije
+                            tehnološke
+                            trendove. Njihov izbor proizvoda je zaista impresivan, od pametnih telefona do bjele tehnike
+                            i
+                            malih
+                            kućanskih aparata. Svi proizvodi koje sam naručila su bili visokokvalitetni i ispunili su
+                            moja
+                            očekivanja.
+                            Također, njihova usluga i podrška su bili izvrsni. Bez sumnje ću se vratiti ovdje za sve
+                            moje
+                            buduće
+                            tehnološke potrebe!</div>
+                    </div>
+                </div>
+            </div>
+            <div class=" row">
+                <div class="col-md-6 recenzija">
+                    <div class="poljeZaRecenziju">
+                        <div style=" margin-bottom: 20px;">
+                            <img src="assets/slike/korisnik2.jpg" class="slikaOsobeKojaRecenzira">
+                            <span class="imeOsobeKojaRecenzira">Marica Vrbnjak</span>
+                            <span class="usernameOsobeKojaRecenzira">@MaricaVrbnjak</span>
+
+                            <span class="zvijezdice">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="far fa-star checked"></span>
+                            </span>
+                        </div>
+                        <div>Ova mrežna trgovina je postala moja omiljena destinacija za kupovinu tehnoloških proizvoda.
+                            Imaju
+                            izvanredan izbor proizvoda koji zadovoljava sve moje potrebe. Osim toga, njihova dostava je
+                            iznimno brza i pouzdana. Jedina sitnica koja je spriječila da daju pet zvjezdica je to što
+                            sam
+                            se suočila s manjim problemom pri povratu jednog proizvoda, ali to je brzo riješeno
+                            zahvaljujući
+                            njihovoj korisničkoj podršci.</div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 recenzija ">
+                    <div class="poljeZaRecenziju">
+                        <div style=" margin-bottom: 20px;">
+                            <img src="assets/slike/korisnik3.jpg" class="slikaOsobeKojaRecenzira">
+                            <span class="imeOsobeKojaRecenzira">Roberto Klarić</span>
+                            <span class="usernameOsobeKojaRecenzira">@RobiKlaric</span>
+
+                            <span class="zvijezdice">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa-solid fa-star-half-stroke checked"></span>
+                            </span>
+
+                        </div>
+                        <div>Kao dugogodišnji kupac tehnoloških proizvoda, ova mrežna trgovina me potpuno oduševila.
+                            Njihova
+                            usluga je izvanredna, od trenutka narudžbe do isporuke. Osoblje je bilo vrlo susretljivo i
+                            stručno, odgovarajući na sva moja pitanja. Osim toga, proizvodi koje sam naručio su bili
+                            visoke
+                            kvalitete i ispunili su moja očekivanja. Bez sumnje, ponovno ću kupovati od njih!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---->
+        <hr style="margin-top: 50px;">
+        <h2 style="text-align: center; margin-top: 50px; margin-bottom: 30px;"> <i
+                class="fa-solid fa-shield-halved"></i>
+            Sigurna kupovina
+        </h2>
+        <div class="row">
+            <div class="col">
+                <div class="nes">
+                    <img src="assets/slike/logo-qudal.png" class="sigurnaKupovina">
+                    <img src="assets/slike/HR_Logo.png" class="sigurnaKupovina">
+                    <img src="assets/slike/goodChoice.avif" class="sigurnaKupovina">
+                    <img src="assets/slike/bestBuy.jpg" class="sigurnaKupovina">
+                    <img src="assets/slike/satisfaction.jpg" class="sigurnaKupovina">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

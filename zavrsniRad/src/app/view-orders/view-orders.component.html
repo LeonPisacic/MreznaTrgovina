@@ -1,0 +1,183 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.addhtml.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-wMk+H8tLWBP/6+7JhZB+uPW8zN/1eJeiojS7MucDxdBbWzJxqfr3qx4KjztndCQJ1gzV2sGKPeZ7/HQRJYzBg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<h1 style="text-align: center; margin-bottom: 5%;" id="pregled" *ngIf="imaNarudzbi">Tvoje narudžbe</h1>
+
+<div class="container">
+    <div class="row red" *ngFor="let proizvod of pregledNarudzbi let idx = index">
+        <h3 style="margin-bottom: 2%;" class="container">Narudžba broj {{idx + 1}}</h3>
+        <!--moram +1 jer idx krece od 0-->
+        <div class="col-md-12">
+            <button class="btn btn-primary text-center" style="text-align: right; width: 100%;"
+                (click)="preuzmiRacun(idx)">
+                <i class="fa-solid fa-download"></i>
+            </button>
+
+        </div>
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tabNarudzba_{{idx}}">
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th style="vertical-align:middle">Ime</th>
+                            <th style="vertical-align:middle">Prezime</th>
+                            <th style="vertical-align:middle">Grad</th>
+                            <th style="vertical-align:middle">Poštanski broj</th>
+                            <th style="vertical-align:middle">Adresa</th>
+                            <th style="vertical-align:middle">Broj telefona</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="text-align: center;">
+
+                            <td style="vertical-align:middle">{{proizvod.narudzba.ime}}</td>
+                            <td style="vertical-align:middle">{{proizvod.narudzba.prezime}}</td>
+                            <td style="vertical-align:middle">{{proizvod.narudzba.grad}}</td>
+                            <td style="vertical-align:middle">{{proizvod.narudzba.postanskiBroj}}</td>
+                            <td style="vertical-align:middle">{{proizvod.narudzba.adresa }} </td>
+                            <td style="vertical-align:middle">{{proizvod.narudzba.brojTelefona }}
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="tabProizvod_{{idx}}">
+                            <thead>
+                                <tr style="text-align: center;">
+                                    <th style="vertical-align:middle">Ime proizvoda</th>
+                                    <!-- <th style="vertical-align:middle">Opis proizvoda</th> -->
+                                    <th style="vertical-align:middle">Cijena proizvoda</th>
+                                    <th style="vertical-align:middle">Količina</th>
+                                    <th style="vertical-align:middle">Ukupno</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let proizvod of proizvod.proizvodi; let idx = index"
+                                    style="text-align: center;">
+                                    <td style="vertical-align:middle">{{proizvod.kratakOpisProizvoda}}</td>
+                                    <td style="vertical-align:middle">${{proizvod.cijena}}</td>
+                                    <td style="vertical-align:middle">{{proizvod.kolicina}}</td>
+                                    <td style="vertical-align:middle">${{((proizvod.cijena * 0.25) +
+                                        proizvod.cijena).toFixed(2)}}
+                                    </td>
+
+                                </tr>
+
+                                <div class="col-md-6 text-right" style="margin-top: 5%; margin-bottom: -20px;">
+                                    <table class="table table-borderless table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <div style="margin-right: 10px;">
+                                                    <th>Subtotal </th>
+                                                    <td> ${{calculateTotals(pregledNarudzbi,
+                                                        idx).SUBTOTAL.toFixed(2)}}</td>
+                                                    <!--ogranicimo na dvije decimale-->
+                                                </div>
+
+
+                                                <th>Tax</th>
+                                                <td>${{calculateTotals(pregledNarudzbi,
+                                                    idx).tax.toFixed(2)}}</td>
+
+
+                                                <div style="margin-left: 10px;">
+                                                    <th class="text-dark">Total</th>
+                                                    <td class="text-cark" style="margin-right: 10px;">
+                                                        ${{calculateTotals(pregledNarudzbi,
+                                                        idx).total.toFixed(2)}}</td>
+                                                </div>
+                                                <!--how to make this button appear just on the right side of {{proizvod.kratakOpisProizvoda}} ??-->
+
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: right;">
+
+                <span *ngIf="!this.proizvod.narudzbaObradena">Status
+                    narudžbe:<span style="margin-left:10px;" class="btn btn-secondary statusNarudzbe"> U obradi <i
+                            class="fa-solid fa-spinner"></i></span>
+
+                </span>
+
+                <span style="margin-right: 10px;" *ngIf="this.proizvod.narudzbaObradena">Status
+                    narudžbe:<span style="margin-left: 10px;" class="btn btn-success"> Poslano <i
+                            class=" fa-solid fa-user-check"></i></span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container praznaKosarica" *ngIf="!imaNarudzbi && !adminUlogiran"> <!--ovo se izvrsava jedino ako na tom korisničkom računu nije izvršena
+nitijedna narudzba-->
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 text-center">
+            <div class="cart">
+                <img src="assets/slike/mini-empty-cart.png" style="margin-bottom: 5%; width: 60%; ">
+                <br>
+                <span class="tekst">Ne postoje kreirane narudžbe na ovom korisničkom račun</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--kod samo ukoliko je admin ulogiran, na klik 'Pozdrav Leon' omogucuje brisanje korisnika-->
+<div class="container" *ngIf="adminUlogiran">
+    <h1 style="text-align: center; margin-bottom: 30px;">Svi korisnici</h1>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th style="vertical-align:middle">Ime</th>
+                            <th style="vertical-align:middle">Prezime</th>
+                            <th style="vertical-align:middle">Email</th>
+                            <th style="vertical-align:middle">Lozinka</th>
+                            <th style="vertical-align: middle;">Obriši</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let korisnik of sviKorisnici; let idx = index">
+
+                            <td class="popisKorisnikaAdmin" *ngIf="korisnik.roll !== 'admin'">{{korisnik.ime}}</td>
+                            <td class="popisKorisnikaAdmin" *ngIf="korisnik.roll !== 'admin'">{{korisnik.prezime}}
+                            </td>
+                            <td class="popisKorisnikaAdmin" *ngIf="korisnik.roll !== 'admin'">{{korisnik.email}}</td>
+                            <td class="popisKorisnikaAdmin" *ngIf="korisnik.roll !== 'admin'">{{korisnik.lozinka}}
+                            </td>
+
+                            <td class="popisKorisnikaAdmin" *ngIf="korisnik.roll !== 'admin'">
+                                <div class="col">
+                                    <button class="btn btn-danger" style="width:100%" (click)="obrisi(idx)"><i
+                                            class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

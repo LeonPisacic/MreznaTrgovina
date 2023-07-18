@@ -1,0 +1,58 @@
+<div class="container">
+    <h3 style="text-align: center; margin-bottom: 50px;">Poruke korisnika</h3>
+    <div class="row" *ngFor="let poruka of mergedProizvodi let idx = index">
+        <div class="col-md-12">
+        </div>
+        <div class="col">
+            <h3 style="text-align: center; margin-bottom: 40px; color:#9F8170;"> Poruka od {{poruka.ime}}
+            </h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th style="vertical-align:middle">Ime</th>
+                            <th style="vertical-align:middle">Email</th>
+                            <th style="vertical-align:middle">Poruka korisnika</th>
+                    </thead>
+
+                    <tbody>
+                        <tr style="text-align: center;">
+
+                            <td style="vertical-align:middle">{{poruka.ime}}</td>
+                            <td style="vertical-align:middle">{{poruka.email}}</td>
+                            <td style="vertical-align:middle">{{poruka.porukaKorisnika}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+
+                <div style="text-align: center;">
+
+                    <button class="btn btn-info btn-md" style=" width: 45%; margin-right: 10px;"
+                        routerLink="/kontaktirajKorisnika" (click)="spremiIndex(idx)">
+                        <span style="margin-right: 5px;"> Kontaktiraj korisnika <i class="fa-solid fa-inbox"></i></span>
+                    </button>
+
+                    <button class="btn btn-success btn-md" style="width: 45%;" (click)="obrisiPoruku(idx)">
+                        <span style="margin-right: 5px;">Riješeno <i class="fa-solid fa-check"></i></span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container praznaKosarica" *ngIf="this.data.brojacPorukaAdmin === 0">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 text-center">
+            <div class="cart">
+                <img src="assets/slike/smile.webp" style="margin-bottom: 2%; width: 30%; ">
+                <span class="tekst">Trenutno ne postoje aktivni upiti kupaca</span>
+            </div>
+        </div>
+    </div>
+
+</div>

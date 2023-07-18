@@ -1,0 +1,43 @@
+<div class="container" style="margin-bottom: -5%;">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="col-md-6 text-center">
+                    <div style=" overflow: hidden; margin-left: auto;margin-right: auto;">
+                        <img class="col" src="{{objektProizvodi.slika}}">
+
+                    </div>
+
+                </div>
+
+                <!---->
+                <div class="col-md-6">
+                    <h3 class="product-title" style="text-align: center; margin-bottom: 20px;">
+                        {{objektProizvodi.imeProizvoda}}</h3>
+                    <div style="text-align: center;">
+                        <p class="product-description">{{objektProizvodi.opis}}</p>
+                    </div>
+                    <div style="margin-left: auto; margin-right: auto; text-align: center;">
+                        <!--i want this class to be always on the same spot in page-->
+                        <h4 class="price" style=" margin-top:50px; ">Cijena: <span>
+                                ${{objektProizvodi.cijena}}</span>
+                        </h4>
+                        <div class="action">
+                            <button class="add-to-cart btn btn-default" type="button" *ngIf="!nemaViseProizvoda"
+                                (click)="this.data.dodajProizvodUKosaricu(index)">Dodaj
+                                u košaricu</button>
+                            <button class="add-to-cart btn btn-default" type="button" *ngIf="nemaViseProizvoda"
+                                (click)="nemaKolicine()"> <i class="fa-regular fa-face-frown"
+                                    style="margin-right: 5px;"></i>Proizvod
+                                nedostupan </button>
+                        </div>
+
+                        <div style="margin-top: 3%; font-weight: bold;">Preostalo kolicina :
+                            {{objektProizvodi.respolozivo}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

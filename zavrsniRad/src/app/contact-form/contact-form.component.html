@@ -1,0 +1,34 @@
+<div class="container">
+
+    <div class="container" style="padding: 10px; border-radius: 10px;">
+        <div class="row" style="justify-content: center;">
+
+            <div class="contact">
+                <h1>Kontaktirajte nas</h1>
+                <form #f="ngForm" (ngSubmit)="resetForm()">
+                    <input type="text" name="ime" id="ime" required [(ngModel)]="trenutnaPoruka.ime" #ime="ngModel"
+                        placeholder="Your name">
+
+                    <p *ngIf="!ime.valid && ime.touched" style="color: red">Unesi svoje ime</p>
+
+                    <input type="email" name="email" id="email" placeholder="Email-adress" required
+                        [(ngModel)]="trenutnaPoruka.email" #email="ngModel">
+
+                    <p *ngIf="!email.valid && email.touched" style="color: red">Unesi svoje email adresu</p>
+
+
+                    <textarea name="porukaKorisnika" rows="6" id="porukaKorisnika" placeholder="Your message" required
+                        [(ngModel)]="trenutnaPoruka.porukaKorisnika" #porukaKorisnika="ngModel"></textarea>
+
+                    <p *ngIf="!porukaKorisnika.valid && porukaKorisnika.touched" style="color: red">Unesi svoje opis</p>
+
+                    <button type="submit" class="btn" style="margin-left: auto; margin-right: auto;"
+                        (click)="submitForme()" [disabled]="!f.valid">
+                        Submit</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

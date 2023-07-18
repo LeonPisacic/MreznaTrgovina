@@ -1,0 +1,106 @@
+html {
+    scroll-behavior: smooth;
+}
+
+/*proizvodi za prodaju sa cijenama*/
+
+.row {
+    margin-top: -20px;
+    text-align: center;
+    /*centriranje slike i texta sa okvirom proizvoda*/
+}
+
+.sirina {
+    padding: 0px 20px;
+    height: 300px;
+
+    /*klasa deklarirana sa .col boostrap klasom*/
+    left: 1%;
+    margin-bottom: 3%;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    margin-right: 2%;
+}
+
+.sirina:hover {
+    /* ili class sirina*/
+    background-color: #E8E8E8;
+    transition: 0.5s;
+}
+
+.sirina img {
+    /*da je slika malo udaljena od samog okvira za proizvod*/
+    padding-top: 10px;
+}
+
+
+/**/
+
+.naslovProizvoda {
+    /*klasa za uređenje naziva proizvoda*/
+    margin-top: 20px;
+    text-align: center;
+    height: 50px;
+}
+
+.redirectProizvoda {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+
+.cijena {
+    /*id ua uređenje cijene ispod slike proizvoda*/
+    text-align: center;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+
+.product-info {
+    /* width: 170px;
+    height: 250px; */
+
+    justify-content: center;
+    align-items: center;
+
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: -50px;
+
+}
+
+.product-info img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.btn {
+    /*klasa za dizajn gumba 'dodaj u košaricu' */
+    /* margin-top: 5%; bolje izgleda al to cu apply-at kad sredim bug */
+    margin-top: 50px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+
+.btn:hover {
+    background-color: #888888;
+    color: white
+}
+
+.praznaKosarica img {
+    height: 300px;
+    width: auto;
+    object-fit: cover;
+    align-items: center;
+}
+
+@media (min-width: 100px) and (max-width:800px) {
+    .row {
+        margin-top: 15px;
+    }
+}

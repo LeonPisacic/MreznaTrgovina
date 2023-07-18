@@ -1,0 +1,25 @@
+.cart img {
+    width: 20%;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.praznaKosarica {
+    width: 100%;
+    border: 5px dotted darkgray;
+    border-radius: 2%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.tekst {
+    font-family: monospace;
+    font-size: 24px;
+}
+
+.col {
+    border: 1px solid black;
+    margin-bottom: 20px;
+    padding: 30px;
+    border-radius: 10px;
+}

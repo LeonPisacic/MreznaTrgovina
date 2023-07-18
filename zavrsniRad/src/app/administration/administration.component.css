@@ -1,0 +1,8 @@
+.redak:hover {
+    cursor: default;
+    background-color: #f0f0f0;
+}
+
+.sadrzajTablice {
+    vertical-align: middle;
+}

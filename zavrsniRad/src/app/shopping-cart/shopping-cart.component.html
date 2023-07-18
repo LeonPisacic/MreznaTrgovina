@@ -1,0 +1,103 @@
+<div class="row">
+
+    <div class="col" *ngIf="checkoutStatus"><app-checkout></app-checkout></div>
+
+    <div class="col">
+        <div class="container" *ngIf="imaProizvoda">
+            <h1 style="margin-bottom: 2%;">Shopping Cart</h1>
+            <table class="table table-striped" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th class="item">Item</th>
+                        <th class="text-center price" style="width: 15%">Price</th>
+                        <th class="text-center quantity" style="width: 15%;">Quantity</th>
+                        <th class="text-center total" style="width: 10%">Total</th>
+                        <th *ngIf="!uCheckOutu" style="width: 10%"></th>
+                    </tr>
+                </thead>
+            </table>
+            <!---->
+            <table class="table table-striped" *ngFor="let kosarica of poljeProizvodaKosarica let idx = index"
+                style="width: 100%;">
+
+                <tbody class="tablica"> <!--body-->
+                    <tr>
+                        <td class="imeProizvodaKosarica">{{kosarica.kratakOpisProizvoda}}</td>
+                        <td class="text-center cijena" style="width:15%;">
+                            ${{kosarica.cijena.toFixed(2)}}</td>
+                        <!---->
+                        <td class="text-center" style="width:15%;">
+                            <div class="kolicina-container">
+                                <span class="smanjenjeKolicine" (click)="smanjiKolicinu(idx)"
+                                    *ngIf="!uCheckOutu"><span>-</span></span>
+
+                                <span class="kolicina">{{kosarica.kolicina}}</span>
+                                <span class="povecanjeKolicine" (click)="povecajKolicinu(idx)"
+                                    *ngIf="!uCheckOutu"><span>+</span></span>
+                            </div>
+                        </td>
+                        <!---->
+                        <td class="text-center totalCijena" style="width:10%; ">${{(kosarica.cijena +
+                            kosarica.cijena * 0.25).toFixed(2)}}
+                        </td>
+                        <!---->
+                        <td style="width: 5%" *ngIf="!uCheckOutu" class="obrisiGumb">
+                            <div class="col">
+                                <button class="btn btn-danger" (click)="obrisi(idx)"><i
+                                        class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <!---->
+            <footer style="background-color:whitesmoke; width: 100%;">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Left side of the footer -->
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <table class="table table-borderless table-sm">
+                                <tbody>
+                                    <tr>
+                                        <th>Subtotal </th>
+                                        <td> ${{subtotal.toFixed(2)}}</td>
+                                        <!--ogranicimo na dvije decimale-->
+                                    </tr>
+                                    <tr>
+                                        <th>Tax</th>
+                                        <td>${{tax.toFixed(2)}}</td>
+                                    </tr>
+                                    <tr style="font-weight: bold;">
+                                        <th class="text-dark">Total</th>
+                                        <td class="text-cark">${{total.toFixed(2)}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="checkoutBtn">
+                        <button class="btn btn-primary" style="width: 30%;" (click)="checkout(true)"
+                            *ngIf="!uCheckOutu">Checkout</button>
+                    </div>
+                </div>
+
+            </footer>
+
+        </div>
+        <div class="container praznaKosarica" *ngIf="!imaProizvoda">
+            <div class="row justify-content-center ">
+                <div class="col-12 col-md-6 text-center ">
+                    <div class="cart">
+                        <img src="assets/slike/empty-cart.png" style="margin-bottom: 5%;">
+                        <br>
+                        <span class="tekst">Tvoja košarica je prazna</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

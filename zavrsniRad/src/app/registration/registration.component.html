@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registracija</title>
+</head>
+
+<body>
+    <form #f="ngForm" (ngSubmit)="resetForm()"> <!--#f je local reference-->
+        <div class="container">
+            <h1>Registracija</h1>
+            <p>Molim ispunite formu za kreiranje korisničkog računa</p>
+
+            <hr>
+            <label for="ime"><b>Ime</b></label>
+            <input type="text" placeholder="Unesite svoje ime" name="ime" id="ime" required [(ngModel)]="reg.ime"
+                #ime="ngModel">
+
+            <p *ngIf="!ime.valid && ime.touched" style="color: red; margin-top: -20px; margin-bottom:20px">Unesite svoje
+                ime</p>
+            <!---->
+            <label for="ime"><b>Prezime</b></label>
+            <input type="text" placeholder="Unesite svoje prezime" name="prezime" id="prezime" required
+                [(ngModel)]="reg.prezime" #prezime="ngModel">
+
+            <p *ngIf="!prezime.valid && prezime.touched" style="color: red; margin-top: -20px; margin-bottom:20px">
+                Unesite svoje prezime</p>
+            <!---->
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Unesi elektroničku poštu" name="email" id="emajl" required
+                [(ngModel)]="reg.email" (change)="checkEmailAdress()" email #email="ngModel">
+
+            <p *ngIf="!email.valid && email.touched " style="color: red; margin-top: -20px; margin-bottom:20px">
+                Molim unesite valjanu email adresu.</p>
+
+            <p *ngIf="emailPostoji" style="color: red">Unesena email adresa se već koristi</p>
+            <!---->
+
+            <label for="grad"><b>Grad</b></label>
+            <input type="text" placeholder="Unesi elektroničku poštu" name="grad" id="grad" required
+                [(ngModel)]="reg.grad" #grad="ngModel">
+
+            <p *ngIf="!grad.valid && grad.touched" style="color: red; margin-top: -20px; margin-bottom:20px">Unesite
+                svoje grad</p>
+            <!---->
+            <label for="adresa"><b>Adresa</b></label>
+            <input type="text" placeholder="Unesite svoju adresu" name="adresa" required [(ngModel)]="reg.adresa"
+                #adresa="ngModel">
+
+            <p *ngIf="!adresa.valid && adresa.touched" style="color: red; margin-top: -20px; margin-bottom:20px">Unesite
+                svoju adresu</p>
+            <!---->
+            <label for="postanskiBroj"><b>Poštanski broj</b></label>
+            <input type="number" placeholder="Unesite svoje poštanski broj" name="postanskiBroj" required
+                [(ngModel)]="reg.postanskiBroj" #postanskiBroj="ngModel">
+
+            <p *ngIf="!postanskiBroj.valid && postanskiBroj.touched"
+                style="color: red; margin-top: -20px; margin-bottom:20px">Unesite svoj poštanski broj
+            </p>
+            <!---->
+            <label for="brojMobitela"><b>Broj mobitela</b></label>
+            <input type="number" placeholder="Unesite svoju adresu" name="brojMobitela" required
+                [(ngModel)]="reg.brojMobitela" #brojMobitela="ngModel">
+
+            <p *ngIf="!brojMobitela.valid && brojMobitela.touched"
+                style="color: red; margin-top: -20px; margin-bottom:20px">Unesite svoj broj mobitela</p>
+            <!---->
+            <label for="psw"><b>Lozinka</b></label>
+            <input type="password" placeholder="Unesi lozinku" name="psw" id="psw" required [(ngModel)]="reg.lozinka"
+                #password="ngModel" autocomplete="on" (change)="checkPassword()">
+
+            <label for="psw-repeat"><b>Ponovi lozinku</b></label>
+            <input type="password" placeholder="Ponovi lozinku" name="pswRepeat" id="psw-repeat"
+                [(ngModel)]="reg.ponoviLozinku" required #repeatPassword="ngModel">
+
+            <span *ngIf="password.value !==repeatPassword.value && repeatPassword.touched"
+                style="color: red; margin-top: -20px; margin-bottom:20px">
+                Lozinke se ne podudaraju</span>
+            <br>
+            <span *ngIf="!checkPassword() && password.touched && repeatPassword.touched"
+                style=" color: red; margin-top: -20px; margin-bottom:20px">
+                Lozinka treba sadržavati minimalno 5 karaktera i jedan simbol</span>
+            <hr>
+            <p>Kreiranjem računa prihvaćate naše <a href="#">Uvjete i privatnosti</a>.</p>
+            <button type="button" class="btn btn-success" (click)="registriraj()"
+                [disabled]="!f.valid || !checkPassword() || password.value !== repeatPassword.value && repeatPassword.touched  || emailPostoji"
+                id="rega">Registriraj se</button>
+
+        </div>
+        <div class="container signin">
+            <p>Već posjeduješ račun? <a routerLink="/login">Prijavi se</a>.</p>
+            <!--redirect ako već posjedujes account-->
+        </div>
+    </form>
+</body>
+
+</html>

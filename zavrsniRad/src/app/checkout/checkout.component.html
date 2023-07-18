@@ -1,0 +1,119 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Customer information column -->
+        <div class="col">
+            <h2>Podaci o kupcu</h2>
+            <form #f="ngForm" *ngIf="!this.kosarica.jeGost">
+                <div class="form-group">
+                    <label for="name">Ime:</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter your name" required
+                        [(ngModel)]="this.data.logiranKorisnik.ime" #ime=ngModel>
+
+                    <p *ngIf="!ime.valid && ime.touched" style="color: red">Unesi svoje ime</p>
+                </div>
+                <div class="form-group">
+                    <label for="surname">Prezime:</label>
+                    <input type="text" class="form-control" name="surname" placeholder="Enter your surname" required
+                        [(ngModel)]="this.data.logiranKorisnik.prezime" #prezime="ngModel">
+                    <p *ngIf="!prezime.valid && prezime.touched" style="color: red">Unesi svoje prezime</p>
+                </div>
+                <div class="form-group">
+                    <label for="city">Grad:</label>
+                    <input type="text" class="form-control" name="city" placeholder="Enter your city" required
+                        [(ngModel)]="this.data.logiranKorisnik.grad" #grad="ngModel">
+                    <p *ngIf="!grad.valid && grad.touched" style="color: red">Unesi svoj grad</p>
+                </div>
+                <div class="form-group">
+                    <label for="postcode">Poštanski broj:</label>
+                    <input type="text" class="form-control" name="postcode" placeholder="Enter your post code" required
+                        [(ngModel)]="this.data.logiranKorisnik.postanskiBroj" #postanskiBroj="ngModel">
+                    <p *ngIf="!postanskiBroj.valid && postanskiBroj.touched" style="color: red">Unesi svoj poštanski
+                        broj</p>
+                </div>
+                <div class="form-group">
+                    <label for="address">Adresa:</label>
+                    <input type="text" class="form-control" name="address" placeholder="Enter your address" required
+                        [(ngModel)]="this.data.logiranKorisnik.adresa" #adresa="ngModel">
+                    <p *ngIf="!adresa.valid && adresa.touched" style="color: red">Unesi svoju adresu</p>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Broj mobitela:</label>
+                    <input type="text" class="form-control" name="phone" placeholder="Enter your phone number" required
+                        [(ngModel)]="this.data.logiranKorisnik.brojMobitela" #brojTelefona="ngModel">
+                    <p *ngIf="!brojTelefona.valid && brojTelefona.touched" style="color: red">Unesi svoje broj mobitela
+                    </p>
+                </div>
+                <input type="radio" id="pouzece" style="margin-right: 1%;" checked>
+                <label for="pouzece" style="width: 90%; margin-bottom: 5%;"> <i class="fa-solid fa-truck-fast"
+                        style="margin-right:10px"></i>Plati pouzećem</label>
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" (click)="submitNarudzbe()" style="width: 100%;"
+                        [disabled]="!f.valid"> Potvrdi
+                        narudžbu</button>
+                </div>
+            </form>
+
+            <form #f2="ngForm" *ngIf="this.kosarica.jeGost">
+                <div class="form-group">
+                    <label for="name">Ime:</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter your name" required
+                        [(ngModel)]="this.korisnikGost.ime" #ime="ngModel">
+                    <p *ngIf="!ime.valid && ime.touched" style="color: red">Unesi svoje ime</p>
+                </div>
+                <!---->
+                <div class="form-group">
+                    <label for="surname">Prezime:</label>
+                    <input type="text" class="form-control" name="surname" placeholder="Enter your surname" required
+                        [(ngModel)]="this.korisnikGost.prezime" #prezime="ngModel">
+                    <p *ngIf="!prezime.valid && prezime.touched" style="color: red">Unesi svoje prezime</p>
+                </div>
+                <!---->
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" name="email" placeholder="Enter your email" required
+                        [(ngModel)]="this.korisnikGost.email" #email="ngModel">
+                    <p *ngIf="!email.valid && email.touched" style="color: red">Unesi svoj email</p>
+                </div>
+                <!---->
+                <div class="form-group">
+                    <label for="grad">Grad:</label>
+                    <input type="text" class="form-control" name="grad" placeholder="Enter your city" required
+                        [(ngModel)]="this.korisnikGost.grad" #grad="ngModel">
+                    <p *ngIf="!grad.valid && grad.touched" style="color: red">Unesi svoj grad</p>
+                </div>
+                <!---->
+                <div class="form-group">
+                    <label for="postanskiBroj">Poštanski broj</label>
+                    <input type="number" class="form-control" name="postanskiBroj" placeholder="Enter your postal code"
+                        required [(ngModel)]="this.korisnikGost.postanskiBroj" #postanskiBroj="ngModel">
+                    <p *ngIf="!postanskiBroj.valid && postanskiBroj.touched" style="color: red">Unesi svoj poštanski
+                        broj</p>
+                </div>
+                <!---->
+                <div class="form-group">
+                    <label for="adresa">Adresa</label>
+                    <input type="text" class="form-control" name="adresa" placeholder="Enter your postal code" required
+                        [(ngModel)]="this.korisnikGost.adresa" #adresa="ngModel">
+                    <p *ngIf="!adresa.valid && adresa.touched" style="color: red">Unesi svoju adresu
+                    </p>
+                </div>
+                <!---->
+                <div class="form-group">
+                    <label for="brojMobitela">Broj mobitela</label>
+                    <input type="number" class="form-control" name="brojMobitela" placeholder="Enter your phone number"
+                        required [(ngModel)]="this.korisnikGost.brojMobitela" #brojMobitela="ngModel">
+                    <p *ngIf="!brojMobitela.valid && brojMobitela.touched" style="color: red">Unesi svoj broj mobitela
+                    </p>
+                </div>
+                <!---->
+                <input type="radio" id="pouzece" style="margin-right: 1%;" checked>
+                <label for="pouzece" style="width: 90%; margin-bottom: 5%;"> <i class="fa-solid fa-truck-fast"
+                        style="margin-right:10px"></i>Plati pouzećem</label>
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" (click)="submitNarudzbe();" style="width: 100%;"
+                        [disabled]="!f2.valid"> Potvrdi
+                        narudžbu</button>
+                </div>
+            </form>
+        </div>
+    </div>

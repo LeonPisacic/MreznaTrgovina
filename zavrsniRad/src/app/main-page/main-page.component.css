@@ -1,0 +1,330 @@
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 40px;
+    margin-top: 40px;
+}
+
+.services-list div {
+    border: 1px solid black;
+    color: black;
+    padding: 20px;
+    font-size: 15px;
+    border-radius: 10px;
+    transition: background 0.5s, transform 0.5s;
+    /*da se smooth vrati kad se makne hover sa jednog od elemenata 'My services' */
+}
+
+.services-list div i {
+    font-size: 50px;
+    /*povecanje logo-a*/
+    margin-bottom: 30px;
+}
+
+.services-list div h2 {
+    font-size: 25px;
+    color: black;
+    margin-bottom: 30px;
+}
+
+.services-list div a {
+    color: black;
+    text-decoration: none;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.services-list div:hover {
+    background-color: #8888;
+    transform: translateY(-30px);
+    transition: 0.5s;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-family: monospace;
+    color: black;
+    /* margin-left: 425px; */
+}
+
+#centered-link {
+    display: flex;
+    justify-content: center;
+}
+
+/***/
+
+.poljeZaRecenziju {
+    padding: 30px;
+    margin-top: 30px;
+    /* margin-right: 15px; */
+    background-color: #eee;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+
+.slikaOsobeKojaRecenzira {
+    width: 15%;
+    border-radius: 50%;
+}
+
+.imeOsobeKojaRecenzira {
+    position: absolute;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.usernameOsobeKojaRecenzira {
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 15px;
+    color: gray
+}
+
+.zvijezdice {
+    position: absolute;
+    right: 50px;
+    margin-top: 20px;
+}
+
+.checked {
+    color: orange;
+}
+
+.half {
+    width: 50%;
+}
+
+.recenzija:hover {
+    transform: translateY(-10px);
+}
+
+.services-review div {
+    transition: background 0.5s, transform 0.5s;
+}
+
+/* @media only screen and (min-width:0px) {
+    .poljeZaRecenziju {
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+} */
+
+@media only screen and (min-width:320px) and (max-width:368px) {
+    .slikaOsobeKojaRecenzira {
+        margin-top: 20px;
+    }
+
+    .zvijezdice {
+        text-align: center;
+        right: 25px;
+    }
+
+    .poljeZaRecenziju {
+        padding: 30px;
+        background-color: #eee;
+        border-radius: 10px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sigurnaKupovina {
+        width: 40px;
+        height: 40px;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .nes {
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width:368px) and (max-width:486px) {
+    .slikaOsobeKojaRecenzira {
+        vertical-align: middle;
+        margin-top: 10px;
+    }
+
+    .sigurnaKupovina {
+        width: 60px;
+        height: 60px;
+
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .nes {
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width:486px) and (max-width:767px) {
+
+    .poljeZaRecenziju {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sigurnaKupovina {
+        width: 80px;
+        height: 80px;
+
+        margin-left: 10px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .nes {
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width:992px) {
+    .poljeZaRecenziju {
+        margin-right: 15px;
+        height: 450px;
+    }
+
+    .slikaOsobeKojaRecenzira {
+        margin-top: 15px;
+    }
+
+    .sigurnaKupovina {
+        width: 100px;
+        height: 100px;
+        margin-right: 40px;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (min-width:992px) {
+    .poljeZaRecenziju {
+        padding: auto;
+        margin-left: auto;
+        height: 350px;
+    }
+
+    .recenzija {
+        padding: auto;
+    }
+
+    .sigurnaKupovina {
+        width: 150px;
+        height: 150px;
+        margin-right: 40px;
+        cursor: pointer;
+    }
+
+    .nes {
+
+        text-align: center;
+
+    }
+}
+
+/**/
+
+html {
+    scroll-behavior: smooth;
+}
+
+/*proizvodi za prodaju sa cijenama*/
+
+.red {
+    margin-top: -20px;
+    text-align: center;
+    /*centriranje slike i texta sa okvirom proizvoda*/
+}
+
+.sirina {
+
+    /*klasa deklarirana sa .col boostrap klasom*/
+    left: 1%;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    margin-right: 2%;
+    margin-bottom: 3%;
+}
+
+.sirina:hover {
+    /* ili class sirina*/
+    background-color: #E8E8E8;
+    transition: 0.5s;
+}
+
+.sirina img {
+    /*da je slika malo udaljena od samog okvira za proizvod*/
+    padding-top: 10px;
+}
+
+
+/**/
+
+.naslovProizvoda {
+    /*klasa za uređenje naziva proizvoda*/
+    margin-top: 20px;
+    text-align: center;
+    height: 50px;
+}
+
+.redirectProizvoda {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+
+.cijena {
+    /*id ua uređenje cijene ispod slike proizvoda*/
+    text-align: center;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+
+.product-info {
+    /* width: 170px;
+    height: 250px; */
+
+    justify-content: center;
+    align-items: center;
+
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: -50px;
+
+}
+
+.product-info img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.btn {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    padding: 5px;
+}
+
+.btn:hover {
+    background-color: #888888;
+    color: white
+}
+
+.praznaKosarica img {
+    height: 300px;
+    width: auto;
+    object-fit: cover;
+    align-items: center;
+}

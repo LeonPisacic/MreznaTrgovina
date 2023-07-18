@@ -1,0 +1,193 @@
+.praznaKosarica {
+    width: 100%;
+    border: 5px dotted darkgray;
+    border-radius: 2%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.cart img {
+    width: 20%;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.tekst {
+    font-family: monospace;
+    font-size: 24px;
+}
+
+td {
+    vertical-align: middle;
+}
+
+.povecanjeKolicine {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    display: inline-block;
+
+    vertical-align: middle;
+}
+
+.smanjenjeKolicine {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.povecanjeKolicine:hover,
+.smanjenjeKolicine:hover {
+    background-color: gray;
+}
+
+.checkoutBtn {
+    text-align: right;
+    margin-top: 2%;
+}
+
+.kolicina-container {
+    display: flex;
+    justify-content: center;
+}
+
+.kolicina-container span {
+    margin: 0 5px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+
+@media only screen and (max-width:399px) {
+    .tablica {
+        font-size: 12px;
+        padding: 0px;
+    }
+
+    .sve {
+        padding: 0px;
+    }
+
+    td.text-center {
+        padding: 0px;
+    }
+
+    .item {
+        width: 5%;
+    }
+
+    .cijena {
+        padding: 4px;
+    }
+
+    .smanjenjeKolicine {
+        margin-right: 5px;
+        margin-left: 8px;
+    }
+
+    .povecanjeKolicine {
+        margin-left: 5px;
+        margin-right: 8px;
+    }
+
+    .total {
+        width: 30%;
+    }
+
+    .obrisiGumb {
+        padding: 0px;
+    }
+
+    .imeProizvodaKosarica {
+        width: 0%;
+    }
+
+    .kolicina-container span {
+        margin-top: 5px;
+        vertical-align: middle;
+        display: inline-block;
+    }
+
+
+}
+
+@media (max-width: 429px) {
+
+    /*da se ukoliko je ekran manji od 429px prvo prikazuje tablica sa kosaricom
+    , a onda forma za upis osobnih podataka kupca*/
+    .row {
+        flex-direction: column;
+    }
+
+    .col {
+        order: 2;
+    }
+
+    .col:nth-child(2) {
+        order: 1;
+    }
+}
+
+
+@media only screen and (min-width:400px) and (max-width:479px) {
+    .item {
+        width: 22%;
+    }
+
+    .sve {
+        padding: 5px;
+    }
+
+    .cijena {
+        padding: 0;
+    }
+
+    .obrisiGumb {
+        padding: 0;
+    }
+
+    .totalCijena {
+        padding: 5px;
+    }
+}
+
+@media only screen and (min-width:480px) and (max-width:510px) {
+    .item {
+        width: 15%;
+
+    }
+}
+
+@media only screen and (min-width:511px) and (max-width:767px) {
+
+    .item {
+        width: 20%;
+    }
+
+    .price {
+        width: 15%;
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width:992px) {
+    .item {
+        width: 40%;
+    }
+
+}
+
+@media only screen and (min-width:993px) {
+
+    .item {
+        width: 52%;
+    }
+
+    .imeProizvodaKosarica {
+        width: 50%;
+    }
+}
