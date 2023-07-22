@@ -5,8 +5,6 @@
 
 
             <div class="col sirina" *ngFor="let proizvod of poljeProizvoda; let i=index">
-                <!--trebao bi se nauciti kako napraviti resonsive design
-            kako bih mogao kreirati svoju klasu 'col' jer kad istu maknem, to je ono sto zelim (prikaz proizvoda) ali nije responsive design-->
                 <img src="/assets/slike/novo.svg" style="width: 40px; position: absolute; right: 40px;">
                 <a class="redirectProizvoda">
                     <div class="product-info" routerLink="/opis" (click)="detalji(proizvod)" (click)="sendIndex(i)">
@@ -15,8 +13,7 @@
                         <div class="cijena">{{proizvod.cijena}}€</div>
                     </div>
                     <button class="btn" (click)="dodajProizvodUKosaricu(i)" *ngIf="proizvod.respolozivo !== 0">
-                        <i class="fa-solid fa-cart-plus" style="margin-right: 5px;"></i> <span>Dodaj u
-                            košaricu</span>
+                        <i class="fa-solid fa-cart-plus" style="margin-right: 5px;"></i> <span>Dodaj u košaricu</span>
                     </button>
 
                     <button class="btn" (click)="this.glavno.nemaKolicine()" *ngIf="proizvod.respolozivo === 0"

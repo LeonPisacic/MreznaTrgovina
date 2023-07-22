@@ -38,3 +38,20 @@ td {
     border-color: green;
     color: white;
 }
+
+.container2 {
+    padding: 30px 0px;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 80%;
+}
+
+.narudzbe {
+    background-color: aliceblue;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.narudzbe:hover {
+    background-color: #C0C0C0
+}

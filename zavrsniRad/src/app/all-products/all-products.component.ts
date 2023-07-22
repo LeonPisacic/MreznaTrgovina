@@ -22,19 +22,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   nemaProizvodaUTojKategoriji: boolean = false; /*boolean vrijednost koja se koristi za provjeru broja proizvoda u kategoriji
   ako je broj proizvoda 0 ispisuje se 'u ovoj kategoriji trenutacno nema proizvoda sa nekom slikom */
 
-  logiranKorisnik: reg = { /*prazan objekt tipa 'reg' interface koji nam sluzi da pratimo ulogiranog korisnika, te sukladno
-  sa time, omogucujemo/onemogucujemo dodavanje proizvoda u kosaricu*/
-    ime: "",
-    prezime: "",
-    email: "",
-    grad: "",
-    postanskiBroj: undefined,
-    adresa: "",
-    brojMobitela: undefined,
-    lozinka: "",
-    ponoviLozinku: "",
-    roll: "",
-  };
+
 
   constructor(public data: DataService) {
     this.data.dohvatiProizvode().subscribe((proizvod) => {
@@ -76,7 +64,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
           })
         }
       });
-    this.logiranKorisnik = this.data.dohvatiKorisnika();
   }
 
   ngOnDestroy() {
@@ -88,12 +75,12 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
     this.sendIndex(index);
 
-    if (!(this.logiranKorisnik.roll === "admin")) {
+    if (!(this.data.logiranKorisnik.roll === "admin")) {
       this.data.postaviTrenutnoDodanProizvod(this.poljeProizvoda[index]); //postavljanje novog proizvoda u kosaricu
       this.data.brojacKosarica += 1;
       swal("Proizvod je dodan u  vašu košaricu");
     }
-    else if (this.data.ulogiranKorisnik && this.logiranKorisnik.roll === "admin") {
+    else if (this.data.ulogiranKorisnik && this.data.logiranKorisnik.roll === "admin") {
       swal("Admin nije u mogućnosti kupovati proizvode", "", "error")
     }
   }

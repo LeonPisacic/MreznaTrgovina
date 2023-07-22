@@ -1,10 +1,16 @@
-<div class="container">
-
-    <h1 style="margin-bottom: 5%;" id="pregled">Sve narudžbe</h1>
-    <div class="row red" *ngFor="let proizvod of sveNarudzbe let idx = index">
-        <h3 style="margin-bottom: 2%; text-align: center; color:#6495ED" class="container">Narudžba broj {{idx + 1}}
+<div class="container" *ngIf="vrstaNarudzbeOdabrana && prikaziNarudzbu">
+    <span style="text-align: start;">
+        <button class="btn btn-primary" style="margin-bottom: 20px;" (click)="vratiKorakNazad2()">Back</button>
+    </span>
+    <div class="row red">
+        <h3 style="margin-bottom: 2%; text-align: center; color:#6495ED" class="container" *ngIf="!narudzbaUTijeku">
+            Sifra narudzbe
+            {{sifraNarudzbeArray[index]}}
         </h3>
-
+        <h3 style="margin-bottom: 2%; text-align: center; color:#6495ED" class="container" *ngIf="narudzbaUTijeku">Sifra
+            narudzbe
+            {{sifraNarudzbeArray2[index]}}
+        </h3>
         <div class="col-md-12">
         </div>
         <div class="col">
@@ -23,12 +29,12 @@
                     <tbody>
                         <tr style="text-align: center;">
 
-                            <td style="vertical-align:middle">{{proizvod.narudzba.ime}}</td>
-                            <td style="vertical-align:middle">{{proizvod.narudzba.prezime}}</td>
-                            <td style="vertical-align:middle">{{proizvod.narudzba.grad}}</td>
-                            <td style="vertical-align:middle">{{proizvod.narudzba.postanskiBroj}}</td>
-                            <td style="vertical-align:middle">{{proizvod.narudzba.adresa }} </td>
-                            <td style="vertical-align:middle">{{proizvod.narudzba.brojTelefona }}
+                            <td style="vertical-align:middle">{{sveNarudzbe[index].narudzba.ime}}</td>
+                            <td style="vertical-align:middle">{{sveNarudzbe[index].narudzba.prezime}}</td>
+                            <td style="vertical-align:middle">{{sveNarudzbe[index].narudzba.grad}}</td>
+                            <td style="vertical-align:middle">{{sveNarudzbe[index].narudzba.postanskiBroj}}</td>
+                            <td style="vertical-align:middle">{{sveNarudzbe[index].narudzba.adresa }} </td>
+                            <td style="vertical-align:middle">{{sveNarudzbe[index].narudzba.brojTelefona }}
 
                         </tr>
                     </tbody>
@@ -37,7 +43,7 @@
             <div class="row">
                 <div class="col">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="tabProizvod_{{idx}}">
+                        <table class="table table-bordered" id="tabProizvod_{{index}}">
                             <thead>
                                 <tr style="text-align: center;">
                                     <th style="vertical-align:middle">Ime proizvoda</th>
@@ -49,7 +55,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let proizvod of proizvod.proizvodi; let idx = index"
+                                <tr *ngFor="let proizvod of sveNarudzbe[index].proizvodi; let idx = index"
                                     style="text-align: center;">
                                     <td style="vertical-align:middle">{{proizvod.kratakOpisProizvoda}}</td>
                                     <td style="vertical-align:middle">${{proizvod.cijena}}</td>
@@ -67,21 +73,21 @@
                                                 <div style="margin-right: 10px;">
                                                     <th>Subtotal </th>
                                                     <td> ${{this.viewOrders.calculateTotals(sveNarudzbe,
-                                                        idx).SUBTOTAL.toFixed(2)}}</td>
+                                                        index).SUBTOTAL.toFixed(2)}}</td>
                                                     <!--ogranicimo na dvije decimale-->
                                                 </div>
 
 
                                                 <th>Tax</th>
                                                 <td>${{this.viewOrders.calculateTotals(sveNarudzbe,
-                                                    idx).tax.toFixed(2)}}</td>
+                                                    index).tax.toFixed(2)}}</td>
 
 
                                                 <div style="margin-left: 10px;">
                                                     <th class="text-dark">Total</th>
                                                     <td class="text-cark" style="margin-right: 10px;">
                                                         ${{this.viewOrders.calculateTotals(sveNarudzbe,
-                                                        idx).total.toFixed(2)}}</td>
+                                                        index).total.toFixed(2)}}</td>
                                                 </div>
                                                 <!--how to make this button appear just on the right side of {{proizvod.kratakOpisProizvoda}} ??-->
                                             </tr>
@@ -89,8 +95,6 @@
 
                                     </table>
                                 </div>
-
-
                             </tbody>
                         </table>
                     </div>
@@ -101,15 +105,16 @@
                 <span style="margin-right: 10px;">Status narudžbe:</span>
 
                 <span class="btn btn-secondary statusNarudzbe" routerLinkActive="active" checked
-                    *ngIf="!proizvod.narudzbaObradena" style="margin-right: 10px; border: 1px solid black;">U obradi
+                    *ngIf="!sveNarudzbe[index].narudzbaObradena" style="margin-right: 10px; border: 1px solid black;">U
+                    obradi
                     <i class="fa-solid fa-spinner"></i>
                 </span>
 
                 <!--i would like for these button when it is proizvod.narudzbaObradena true, to activate btn-success boostrap class
                 , so it can look green -->
-                <span class="btn statusNarudzbe" [class.btn-success]="proizvod.narudzbaObradena"
+                <span class="btn statusNarudzbe" [class.btn-success]="sveNarudzbe[index].narudzbaObradena"
                     routerLinkActive="active" checked style="border: 1px solid black;"
-                    (click)="obrisiNarudzbu(idx); ">Poslano
+                    (click)="obrisiNarudzbu(index); ">Poslano
                     <i class="fa-solid fa-user-check"></i>
                 </span>
 
@@ -118,17 +123,62 @@
     </div>
 </div>
 
-<div class="container praznaKosarica" *ngIf="sveNarudzbe.length === 0"> <!--ovo se izvrsava jedino ako na tom korisničkom računu nije izvršena
-    nitijedna narudzba-->
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-6 text-center">
-            <div class="cart">
-                <img src="assets/slike/smile.webp" style="margin-bottom: 2%; width: 30%; ">
-                <span class="tekst">Sve narurdzbe su poslane i riješene!</span>
-            </div>
+<div class="container" *ngIf="vrstaNarudzbeOdabrana && !prikaziNarudzbu">
+    <span style="text-align: start;">
+        <button class="btn btn-primary" style="margin-bottom: 20px;" (click)="vratiKorakNazad()">Back</button>
+    </span>
+
+    <h2 style="text-align: center; margin-bottom: 20px;" *ngIf="narudzbaUTijeku"> <i class="fa-solid fa-hourglass-end"
+            style="margin-right: 10px;"></i>Narudžbe u tijeku
+    </h2>
+    <h2 style="text-align: center;margin-bottom: 20px;" *ngIf="!narudzbaUTijeku"> <i
+            class="fa-regular fa-calendar-check" style="margin-right: 10px;"></i>Riješene narudžbe</h2>
+
+    <div class="row" *ngFor="let proizvod of sveNarudzbe let idx = index">
+        <div class="col" style="text-align: center;">
+            <button class="btn narudzbe" (click)="sendIndex(idx)">
+                <span *ngIf="!narudzbaUTijeku">
+                    Sifra narudzbe {{sifraNarudzbeArray[idx]}}
+                </span>
+
+                <span *ngIf="narudzbaUTijeku">
+                    Sifra narudzbe {{sifraNarudzbeArray2[idx]}}
+                </span>
+
+            </button>
         </div>
     </div>
+
 </div>
+
+<div class="container container2" *ngIf="!vrstaNarudzbeOdabrana">
+    <h1 style="text-align: center; margin-bottom: 30px;">Izaberi tip narudžbe</h1>
+
+    <div class="row">
+        <div class="col">
+            <div style="text-align: center;">
+                <span class="col-md-6 text-center">
+                    <button class="btn btn-success" style="width: 50%;" (click)="filtrirajRijeseneNarudzbe()">
+                        <i class="fa-regular fa-circle-check" style="margin-right: 10px;"></i>Riješene narudžbe
+                    </button>
+                </span>
+            </div>
+            <br />
+            <!---->
+
+            <div style="text-align: center;">
+                <span class="col-md-6 text-center">
+                    <button class="btn btn-danger" style="width: 50%;" (click)="filtriraj_Narudzbe_Na_Cekanju()">
+                        <i class="fa-solid fa-spinner" style="margin-right: 10px;"></i>Narudžbe na čekanju
+                    </button>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 
 <!--kod samo ukoliko je admin ulogiran, na klik 'Pozdrav Leon' omogucuje brisanje korisnika-->
 <div class="container" *ngIf="this.viewOrders.adminUlogiran">

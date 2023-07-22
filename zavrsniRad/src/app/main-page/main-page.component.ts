@@ -4,6 +4,7 @@ import { kosarica, proizvodi, reg } from '../model';
 import swal from 'sweetalert';
 import { Subscription } from 'rxjs';
 import { MainPageComponent } from '../all-products/all-products.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,21 +20,7 @@ export class PocetnaComponent implements OnInit {
   nemaProizvodaUTojKategoriji: boolean = false; /*boolean vrijednost koja se koristi za provjeru broja proizvoda u kategoriji
   ako je broj proizvoda 0 ispisuje se 'u ovoj kategoriji trenutacno nema proizvoda sa nekom slikom */
 
-  logiranKorisnik: reg = { /*prazan objekt tipa 'reg' interface koji nam sluzi da pratimo ulogiranog korisnika, te sukladno
-  sa time, omogucujemo/onemogucujemo dodavanje proizvoda u kosaricu*/
-    ime: "",
-    prezime: "",
-    email: "",
-    grad: "",
-    postanskiBroj: undefined,
-    adresa: "",
-    brojMobitela: undefined,
-    lozinka: "",
-    ponoviLozinku: "",
-    roll: "",
-  };
-
-  constructor(public data: DataService, public glavno: MainPageComponent) {
+  constructor(public data: DataService, public glavno: MainPageComponent, private router: Router) {
     this.data.dohvatiProizvode().subscribe((proizvod) => {
       this.poljeProizvoda = proizvod.filter((_, index) => [0, 1, 5, 6, 19].includes(index));
     })
@@ -59,7 +46,7 @@ export class PocetnaComponent implements OnInit {
                 //  console.log(obj.kategorijaID === this.idKategorije)
                 //vracamo vrijednost koja se podudara sa ID-em, ako je vrijednost true (proizvodi se podudaraju i proizvod se dodjeljuje toj kategoriji)
                 return obj.kategorijaID === this.idKategorije
-              })
+              });
             }
 
             if (this.poljeProizvoda.length === 0) { /*ako kategorija nema nijedan proizvod u sebi, boolean se postavlja na true,
@@ -69,10 +56,11 @@ export class PocetnaComponent implements OnInit {
             else { /*ako kategorija proizvoda sadrzi proizvod/proizvode */
               this.nemaProizvodaUTojKategoriji = false
             }
-          })
+          });
+
         }
       });
-    this.logiranKorisnik = this.data.dohvatiKorisnika();
+
   }
 
   ngOnDestroy() {
@@ -81,15 +69,14 @@ export class PocetnaComponent implements OnInit {
 
   /*metoda za dodavanje proizvoda u kosaricu, na temelju roll-e i ulogiranog/neulogiranog korisnika ispisuju se poruke */
   dodajProizvodUKosaricu(index: number) {
-
     this.sendIndex(index);
 
-    if (!(this.logiranKorisnik.roll === "admin")) {
+    if (!(this.data.logiranKorisnik.roll === "admin")) {
       this.data.postaviTrenutnoDodanProizvod(this.poljeProizvoda[index]); //postavljanje novog proizvoda u kosaricu
       this.data.brojacKosarica += 1;
       swal("Proizvod je dodan u  vašu košaricu");
     }
-    else if (this.data.ulogiranKorisnik && this.logiranKorisnik.roll === "admin") {
+    else if (this.data.ulogiranKorisnik && this.data.logiranKorisnik.roll === "admin") {
       swal("Admin nije u mogućnosti kupovati proizvode", "", "error")
     }
   }
@@ -98,6 +85,5 @@ export class PocetnaComponent implements OnInit {
   detalji(proizvod: proizvodi) {
     this.data.dohvatiOpisProizvoda(proizvod);
   }
-
 
 }

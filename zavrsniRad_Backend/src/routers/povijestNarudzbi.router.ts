@@ -54,6 +54,7 @@ router.post('/', asyncHandler(async (req, res) => {
         html: `
             <p>Dragi ${newNarudzba.narudzba.ime} ${newNarudzba.narudzba.prezime},</p>
             <p>Zahvaljujemo vam na narudžbi i povjerenju. Vaš paket možete očekivati na vašoj adresi u roku od 5 radnih dana.</p>
+            <p >Vaša jedinstavena sifra narudžbe: ${(newNarudzba as any)._id}.</p>
             <p>U prilogu vam također prilažemo i račun.</p>
             <br/>
             </br>
@@ -166,6 +167,7 @@ router.put("/", asyncHandler(async (req, res) => {
         <p>Vaša narudžba poslana je kurirskoj službi, te će na tvoju adresu stići kroz 2 radna dana :)</p>
         <p>Hvala na ukazanom povjerenju, i veselimo se vašim budućim narudžbama!</p>
         <br/>
+        <p >Vaša jedinstavena sifra narudžbe: ${(product as any)._id}.</p>
         <p >U slučaju bilo kakvih poteškoća, slobodni ste nam javiti nam se.</p>
         <br/>
         <br/>

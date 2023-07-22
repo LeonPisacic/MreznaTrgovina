@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { kategorijaProizvoda, reg } from '../model';
 import { DataService } from '../service/data.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
 
@@ -20,6 +20,8 @@ export class NavbarComponent implements OnInit { /*komponenta koja prima subscri
   jeUlogiran: boolean = false;
   jeAdmin: boolean = false;
 
+
+
   logiranKorisnik: reg = { /*prazan objekt tipa interface 'reg' kojeg punimo sa sadrzajem trenutnog korisnika */
     ime: "",
     prezime: "",
@@ -36,6 +38,7 @@ export class NavbarComponent implements OnInit { /*komponenta koja prima subscri
 
   subs: Subscription = new Subscription()
   status: Subscription = new Subscription();
+
 
   constructor(public dataService: DataService, private router: Router) {
     this.dataService.dohvatiKategorijeProizvoda().subscribe((poljeKategorija) => {
@@ -58,6 +61,8 @@ export class NavbarComponent implements OnInit { /*komponenta koja prima subscri
             else {
               this.jeAdmin = false;
             }
+
+            this.dataService.pratiLogiranuVrijednost.next(this.jeAdmin)
           }
         }
       )
@@ -70,8 +75,7 @@ export class NavbarComponent implements OnInit { /*komponenta koja prima subscri
           gumbove registracija/login, odnosno 'Pozdrav Leon' i 'odjavi se' gumb  */
           this.dataService.jeUlogiran = resp;
         }
-      }
-    )
+      });
   }
 
   ngOnDestroy() { /*prekidamo preplatu, da se nebi trosili nepotrebni resursi i tako usporavali stranicu */
@@ -91,15 +95,16 @@ export class NavbarComponent implements OnInit { /*komponenta koja prima subscri
       .then((willDelete) => {
         if (willDelete) {
           swal("Uspješno ste se odjavili", "", "success");
+          this.dataService.setUlogiranKorisnik(false);
           this.dataService.resetLogiranKorisnik(); /*praznimo objekt tipa 'reg' iz data.service-a */
           this.jeUlogiran = false;
           this.dataService.jeUlogiran = false;
-          this.dataService.setUlogiranKorisnik(false);
           this.dataService.isprazniKosaricu(); /*false oznacuje izlaz iz logiranog nacina, odnosno odjava */
           this.dataService.brojacKosarica = 0; //nakon odjave postavimo span na nulu jer postaje prazna kosarica
-          this.router.navigate([""])
+          this.router.navigate(["/"])
         }
       });
+
   }
 
   filtrirajKategoriju(id: number) {

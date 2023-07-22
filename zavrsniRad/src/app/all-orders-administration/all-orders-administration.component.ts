@@ -3,6 +3,7 @@ import { DataService } from '../service/data.service';
 import { NarudzbaSve } from '../model';
 import swal from 'sweetalert';
 import { PregledNarudzbiComponent } from '../view-orders/view-orders.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-orders-administration',
@@ -12,12 +13,41 @@ import { PregledNarudzbiComponent } from '../view-orders/view-orders.component';
 export class AllOrdersAdministrationComponent implements OnInit {
 
   sveNarudzbe: NarudzbaSve[] = [];
-  narudzbaPoslana: boolean = false;
+  vrstaNarudzbeOdabrana: boolean = false;
+  prikaziNarudzbu: boolean = false;
+  narudzbaUTijeku: boolean = false;
 
-  constructor(private data: DataService, public viewOrders: PregledNarudzbiComponent) { }
+  index: number = 0;
+  sifraNarudzbeArray: any[] = [];
+  sifraNarudzbeArray2: any[] = [];
+
+  constructor(private data: DataService, public viewOrders: PregledNarudzbiComponent, private router: Router) { }
 
   ngOnInit() {
     this.refresh();
+
+    this.data.dohvatiNarudzbe().subscribe((data) => {
+      for (let i = 0; i < data.length; i++) {
+        if (!(data[i].narudzbaObradena)) {
+          this.sifraNarudzbeArray2.push((data[i] as any)._id);
+        }
+        else {
+          this.sifraNarudzbeArray.push((data[i] as any)._id);
+        }
+      }
+    });
+
+
+  }
+
+
+  sendIndex(idx: number) {
+    this.index = idx;
+
+    this.vrstaNarudzbeOdabrana = true;
+    this.prikaziNarudzbu = true;
+
+    return this.sveNarudzbe[idx];
   }
 
   refresh() {
@@ -37,8 +67,7 @@ export class AllOrdersAdministrationComponent implements OnInit {
         };
       });
 
-      // Sakrivanje narudžbi koje su poslane (narudzbaObradena === true)
-      this.sveNarudzbe = this.sveNarudzbe.filter((narudzba) => !narudzba.narudzbaObradena);
+
     });
   }
 
@@ -59,9 +88,51 @@ export class AllOrdersAdministrationComponent implements OnInit {
             icon: "success",
           });
           this.data.promjeniDioNarudzbe(this.sveNarudzbe).subscribe();
-          // Sakrivanje narudžbe iz prikaza
-          this.sveNarudzbe.splice(idx, 1);
+          console.log(this.sveNarudzbe[idx])
+          this.sifraNarudzbeArray.push((this.sveNarudzbe[idx] as any)._id);
+
+          this.sveNarudzbe.splice(idx, 1);      // Sakrivanje narudžbe iz prikaza
+          this.vrstaNarudzbeOdabrana = false;
+          this.prikaziNarudzbu = false;
         }
       });
+  }
+
+  filtriraj_Narudzbe_Na_Cekanju() {
+    this.narudzbaUTijeku = true;
+
+    this.data.dohvatiNarudzbe().subscribe((data) => {
+      const filteredData = data.filter((obj) => {
+        return obj.narudzbaObradena === false;
+      });
+
+      this.sveNarudzbe = filteredData; //dodavanje filtrirane varijable (filteredData) varijabli, odnosno array-u kojeg ispisujemo u HTML-U
+    });
+
+
+    this.vrstaNarudzbeOdabrana = true;
+  }
+
+  filtrirajRijeseneNarudzbe() {
+    this.narudzbaUTijeku = false;
+
+    this.data.dohvatiNarudzbe().subscribe((data) => {
+      const filteredData = data.filter((obj) => {
+        return obj.narudzbaObradena === true;
+      });
+
+      this.sveNarudzbe = filteredData;
+    });
+
+    this.vrstaNarudzbeOdabrana = true;
+  }
+
+  vratiKorakNazad() {
+    this.vrstaNarudzbeOdabrana = false;
+  }
+
+  vratiKorakNazad2() {
+    this.vrstaNarudzbeOdabrana = true;
+    this.prikaziNarudzbu = false;
   }
 }

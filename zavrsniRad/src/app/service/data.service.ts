@@ -19,6 +19,7 @@ export class DataService {
   ulogiranKorisnikChange: Subject<boolean> = new Subject();
   odabranaKategorijaChange: Subject<number> = new Subject();
   odabraniKorisnikNaruduzbaChange: Subject<reg> = new Subject();
+  pratiLogiranuVrijednost: Subject<boolean> = new Subject();
 
   trenutniIndexProizvoda: number = -1
   editProizvod: boolean = false;
